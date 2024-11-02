@@ -8,21 +8,36 @@ class Cat:
 
     def play(self):
         if self.energy > 10:
-            self.happiness += 10
-            self.energy -= 10
-            print(f"{self.name} играет и радуется!")
+            self.happiness += random.randint(5, 15)
+            self.energy -= random.randint(10, 20)
+            print(f"{self.name} играет и радуется! Счастье: {self.happiness}, Энергия: {self.energy}")
         else:
             print(f"{self.name} слишком уставший, чтобы играть.")
 
     def sleep(self):
-        self.energy += 20
-        print(f"{self.name} спит и восстанавливает силы.")
+        self.energy += random.randint(15, 25)
+        print(f"{self.name} спит и восстанавливает силы. Энергия: {self.energy}")
+
+    def do_nothing(self):
+        self.happiness -= random.randint(5, 10)
+        print(f"{self.name} скучает... Счастье: {self.happiness}")
+
+    def live_a_day(self):
+        # Каждый день котик случайным образом решает, что делать
+        action = random.choice(['play', 'sleep', 'do_nothing'])
+        if action == 'play':
+            self.play()
+        elif action == 'sleep':
+            self.sleep()
+        else:
+            self.do_nothing()
 
     def status(self):
         print(f"{self.name}: счастье = {self.happiness}, энергия = {self.energy}")
 
-# Пример использования
+# Симуляция жизни котика на протяжении 10 дней
 my_cat = Cat("Мурка")
-my_cat.play()
-my_cat.sleep()
-my_cat.status()
+for day in range(10):
+    print(f"\nДень {day + 1}:")
+    my_cat.live_a_day()
+    my_cat.status()
